@@ -4,11 +4,11 @@ Ce projet est une application mobile e-commerce développée avec Flutter, conne
 Il respecte l'ensemble du tunnel d'achat (Catalogue -> Panier -> Paiement -> Commande).
 
 ## 🚀 Fonctionnalités implémentées
-- **Boutique Strapi** : 10 produits, 3 catégories, 1 produit variable et 1 promotion.
-- **Application** : Liste des produits avec image, nom et prix corrects.
-- **Détail** : Écran détail, gestion du chargement et des erreurs.
-- **Panier** : Panier d'achat fonctionnel (niveau 1 et plus).
-- **Architecture propre** : Modèle, service et écrans séparés, aucune clé secrète dans le dépôt.
+- **Boutique Strapi** ;
+- **Application** : Liste des produits avec image, nom et leurs prix.
+- **Détail** : Écran détail, gestion du chargement.
+- **Panier** : Panier d'achat fonctionnel.
+- **Architecture propre** : Modèle, service et écrans séparés.
 
 ---
 
