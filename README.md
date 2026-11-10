@@ -1,7 +1,7 @@
 # 🛒 Application E-Commerce Flutter
 
-Ce projet est une application mobile e-commerce développée avec Flutter, connectée à un backend headless Strapi v5 en local. 
-Il respecte l'ensemble du tunnel d'achat (Catalogue -> Panier -> Paiement -> Commande).
+Ce projet est une application e-commerce Flutter connectée à un backend headless Strapi v5.
+Le parcours de paiement est une simulation : aucun paiement réel ni commande payée n'est créé.
 
 ## 🚀 Fonctionnalités implémentées
 - **Boutique Strapi** ;
@@ -14,20 +14,16 @@ Il respecte l'ensemble du tunnel d'achat (Catalogue -> Panier -> Paiement -> Com
 
 ## 💻 Commandes de lancement
 
-Pour tester ce projet en local, deux serveurs doivent tourner simultanément : le backend (Strapi) et le frontend (Flutter).
-
-### 1. Lancement du Backend (Strapi)
-Ouvrez un terminal, placez-vous dans le dossier de votre projet Strapi et exécutez :
-
-    npm run develop
-
-*(Le serveur doit être accessible sur http://localhost:1337)*.
-
-### 2. Lancement de l'Application Mobile (Flutter)
-Ouvrez un second terminal, placez-vous à la racine du projet Flutter et exécutez ces deux commandes :
+Le backend Strapi hébergé sur Render est utilisé par défaut. Depuis la racine du projet :
 
     flutter pub get
-    flutter run
+    flutter run -d chrome
+
+Pour utiliser un autre backend, indiquez son adresse sans `/api` :
+
+    flutter run -d chrome --dart-define=STRAPI_URL=http://localhost:1337
+
+Sur un appareil Android, `localhost` désigne l'appareil lui-même ; utilisez une adresse accessible depuis celui-ci. Le backend doit autoriser les requêtes de l'origine Flutter Web via CORS.
 
 ---
 
