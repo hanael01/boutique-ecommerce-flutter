@@ -13,7 +13,7 @@ class Produit {
     required this.description, // <-- Nouveau champ ajouté
   });
 
-  factory Produit.fromJson(Map<String, dynamic> json) {
+  factory Produit.fromJson(Map<String, dynamic> json, {required Uri backendUrl}) {
     // Récupération du prix
     var rawPrice = json['Prix'] ?? json['price'] ?? json['prix'] ?? 0;
     double parsedPrice = 0.0;
@@ -35,7 +35,7 @@ class Produit {
     }
 
     if (imgUrl.startsWith('/')) {
-      imgUrl = 'http://localhost:1337$imgUrl';
+      imgUrl = backendUrl.resolve(imgUrl).toString();
     }
 
     return Produit(

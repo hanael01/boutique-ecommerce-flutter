@@ -78,11 +78,21 @@ class ProductDetailScreen extends StatelessWidget {
                       icon: const Icon(Icons.shopping_cart),
                       label: const Text('Ajouter au panier', style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
                       onPressed: () async {
-                        await ApiService.ajouterAuPanier(produit.title, produit.price);
-                        Navigator.pop(context);
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          SnackBar(content: Text('"${produit.title}" ajouté avec succès !'), backgroundColor: Colors.green),
-                        );
+                        final messenger = ScaffoldMessenger.of(context);
+                        final navigator = Navigator.of(context);
+                        try {
+                          await ApiService.ajouterAuPanier(produit.title, produit.price);
+                          if (!context.mounted) return;
+                          navigator.pop();
+                          messenger.showSnackBar(
+                            SnackBar(content: Text('"${produit.title}" ajouté avec succès !'), backgroundColor: Colors.green),
+                          );
+                        } catch (error) {
+                          if (!context.mounted) return;
+                          messenger.showSnackBar(
+                            SnackBar(content: Text('Impossible d’ajouter au panier : $error')),
+                          );
+                        }
                       },
                     ),
                   ),

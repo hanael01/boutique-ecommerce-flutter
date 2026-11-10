@@ -63,8 +63,17 @@ class _CartScreenState extends State<CartScreen> {
                         trailing: IconButton(
                           icon: const Icon(Icons.delete, color: Colors.red),
                           onPressed: () async {
-                            await ApiService.supprimerPanier(item['documentId']);
-                            loadCart();
+                            try {
+                              await ApiService.supprimerPanier(item['documentId']);
+                              if (!mounted) return;
+                              loadCart();
+                            } catch (error) {
+                              if (!mounted) return;
+                              if (!context.mounted) return;
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(content: Text('Impossible de supprimer l’article : $error')),
+                              );
+                            }
                           },
                         ),
                       ),

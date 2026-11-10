@@ -101,10 +101,19 @@ class _ProductListScreenState extends State<ProductListScreen> {
                                 // Petit bouton d'ajout rapide
                                 InkWell(
                                   onTap: () async {
-                                    await ApiService.ajouterAuPanier(produit.title, produit.price);
-                                    ScaffoldMessenger.of(context).showSnackBar(
-                                      SnackBar(content: Text('"${produit.title}" ajouté !'), backgroundColor: Colors.green),
-                                    );
+                                    final messenger = ScaffoldMessenger.of(context);
+                                    try {
+                                      await ApiService.ajouterAuPanier(produit.title, produit.price);
+                                      if (!context.mounted) return;
+                                      messenger.showSnackBar(
+                                        SnackBar(content: Text('"${produit.title}" ajouté !'), backgroundColor: Colors.green),
+                                      );
+                                    } catch (error) {
+                                      if (!context.mounted) return;
+                                      messenger.showSnackBar(
+                                        SnackBar(content: Text('Impossible d’ajouter au panier : $error')),
+                                      );
+                                    }
                                   },
                                   child: Container(
                                     padding: const EdgeInsets.all(6),
